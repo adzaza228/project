@@ -1,39 +1,48 @@
 {% extends 'common.html' %}
 {% block content %}
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">Akella</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <a class="navbar-brand" href="">Akella</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{% if request.user.is_authenticated %}
+    <div class="collapse navbar-collapse" id="">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-      <!--  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="tth">Log out <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="sign">login user</a>
+        <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">ru/en</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="register">register</a>
-      </li>
-     <!-- <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Ничего не найдешь" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Не найти</button>
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
+{% else %}
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sign">login user</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="register">register</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Ничего не найдешь" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Не найти</button>
+        </form>
+    </div>
+{% endif %}
 </nav>
 
 <main role="main">
@@ -42,16 +51,38 @@
   <div class="jumbotron">
     <div class="container">
       <h1 class="display-3">Shotgun-book</h1>
-      <p>Нужно быть зарегестрированным, чтобы использовать сайт</p>
+
     </div>
 
   </div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Свисто-перделки</h2>
+        <p>Здесь написаны всякие статьи, наподобии информационного интернет - портала.</p>
+        <p><a class="btn btn-secondary" href="sviston" role="button">View details »</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Оружие</h2>
+        <p>Здесь хранятся картинки и гифки которые мне понравились. Их можно посмотреть и скачать.</p>
+        <p><a class="btn btn-secondary" href="shop-gun" role="button">View details »</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Литература</h2>
+        <p>Здесь книжный интернет магазин. Можно прочитать описание моих любимых книг, добавить их в корзину, и наверно даже можно будет заказать.</p>
+        <p><a class="btn btn-secondary" href="shop-book" role="button">View details »</a></p>
+      </div>
+    </div>
 
+    <hr>
+
+  </div>
 
 </main>
 
 <footer class="container">
-  <p>© Company XyeCoc 2017-2020</p>
+  <p>© Project for github</p>
 </footer>
 
 {% endblock %}
