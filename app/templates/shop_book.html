@@ -1,0 +1,91 @@
+{% extends 'common.html' %}
+<head>
+    <link rel="stylesheet" href="static/sass/main.sass">
+</head>
+{% block content %}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="">Akella</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{% if request.user.is_authenticated %}
+    <div class="collapse navbar-collapse" id="">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="tth">Log out <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">ru/en</a>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+{% else %}
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sign">login user</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="register">register</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Ничего не найдешь" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Не найти</button>
+        </form>
+    </div>
+{% endif %}
+</nav>
+    <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Book-shop</h1>
+      <p style="margin-left: 25px;font-size: large; margin-top: -5px">Давайте читать хорошие книжки</p>
+    </div>
+  </div>
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8 blog-main">
+
+
+      <div class="blog-post">
+        <h2 class="blog-post-title">Зачем читать книжки?</h2>
+        <p>Чтобы быть умным!</p>
+        <hr>
+        <p>Здесь собраны самые лучшие книги, которые надо читать. Они очень интересные, потому что я, как человек не любящий читать, прочел их!</p>
+
+
+
+
+</div></div></div></main>
+<div class="container">
+  <div class="row" style="margin-top: 30px; ">
+    {% for item in book %}
+    <div class="col-4"  style="margin-bottom: 25px">
+      <img src="static/img/{{ item.image }}" width="auto" height="300px">
+      <p style="margin-top: 15px; margin-bottom: 5px">{{ item.name }}</p>
+      <p style="margin-top: 5px">{{ item.author }}</p>
+        <hr>
+        <p>{{ item.short_description }}</p>
+                <div class="btn-group">
+                  <a type="button" class="btn btn-sm btn-outline-secondary" href="{% block button %}book{% endblock %}?id={{item.id}}">подробно</a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">купить</button>
+                </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+</div>
+{% endblock %}
+{% block title %} Book-shop {% endblock %}
