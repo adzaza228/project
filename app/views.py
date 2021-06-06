@@ -3,8 +3,6 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-import datetime
-from datetime import timedelta
 from app.models import block
 from app.models import article
 from app.models import book
@@ -33,7 +31,6 @@ def list_book_shop(request):
     return render(request, 'list_book_shop.html', context)
 
 
-
 def montana(request):
     return render(request, 'Tony_Montana.html')
 
@@ -47,23 +44,6 @@ def sviston(request):
         'articles': article.objects.all()
     }
     return render(request, 'sviston.html', context)
-
-
-#def my_main(request):
-#    today = datetime.date.today()
- #   start_date = today - timedelta(days=6)
- #   start_date = str(start_date)
-#    today = str(today)
-#     r = requests.get('https://www.nbrb.by/api/exrates/rates/dynamics/145?startdate=' + start_date + '&enddate=' + today)
-#     y = json.loads(r.text)
-#     x = 0
-#     for i in y:
-#         x = x + i['Cur_OfficialRate']
-#     x = x/7
-#     context = {
-#         'Kurs': x
-#     }
- #    return render(request, 'main_my.html')
 
 
 def sign_in(request):
@@ -89,8 +69,9 @@ def registration(request):
 def register_func(request):
     try:
         user = User.objects.create_user(
-        request.POST['petya'],
-        password=request.POST['password'],)
+            request.POST['petya'],
+            password=request.POST['password'],
+        )
 
     except Exception as e:
         return HttpResponseRedirect('sign')
@@ -136,3 +117,21 @@ def delete_to_cart(request):
 def cart_list(request):
     context = {'cart': cart.objects.filter(href_user=request.user)[0]}
     return render(request, 'cart.html', context)
+
+
+def shop_cart_list(request):
+    _cart_ = cart.objects.filter(href_user=request.user)[0]
+    sum_price = 0
+    for i in _cart_.many_to_many_field.all():
+        sum_price += i.price
+
+    context = {
+        'cart': _cart_,
+        'sum_books': len(_cart_.many_to_many_field.all()),
+        'sum_price': sum_price
+    }
+
+    return render(request, 'checkout_and_cart.html', context)
+
+
+def cart_in_list_shop_book(request): pass
