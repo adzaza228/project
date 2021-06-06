@@ -10,7 +10,6 @@ urlpatterns = [
     path("login_user", login_user),
     path('register', registration),
     path('plain_jain', register_func),
-#   path('htt', my_main),
     path('tth', log_out),
     path('sviston', sviston),
     path('Tony-Montana', montana),
@@ -21,6 +20,5 @@ urlpatterns = [
     path('cart-list', cart_list),
     path('add-cart', add_to_cart),
     path('delete-to-cart', delete_to_cart),
-
-
-]
+    path('buy-cart', shop_cart_list),
+    ]
